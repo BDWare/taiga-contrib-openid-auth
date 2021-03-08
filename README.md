@@ -1,5 +1,5 @@
-taiga-contrib-openid-auth
-=========================
+# taiga-contrib-openid-auth
+
 An OpenID / Keycloak Authentication Plugin. Heavily based off of
 [taiga-contrib-github-auth](https://github.com/taigaio/taiga-contrib-github-auth).
 
@@ -8,16 +8,19 @@ Compatible with Taiga 4.2.1, 5.x, 6
 # Installation
 
 ## Docker
+
 This plugin is compatible with the offical taiga docker images 😃
 https://github.com/taigaio/taiga-docker
 
-This project builds 2 imagaes based off the images provided by taiga. This should allow anyother customisations to continue to work 
+This project builds 2 imagaes based off the images provided by taiga. This should allow anyother customisations to continue to work
 The following will show the changes needed to the default docker-compose file to install the openid plugin
 
-### Config 
+### Config
+
 The 2 images:
- - robrotheram/taiga-front-openid
- - robrotheram/taiga-back-openid
+
+- robrotheram/taiga-front-openid
+- robrotheram/taiga-back-openid
 
 Use the following environmental setting to configure the frontend conf.json and backed settings.py
 
@@ -32,6 +35,7 @@ OPENID_NAME: "Name you want to give your openid provider e.g keycloak"
 ```
 
 ### Docker-compose file modified from https://github.com/taigaio/taiga-docker
+
 ```
 version: "3.5"
 
@@ -59,10 +63,10 @@ x-environment:
   # Should be the same as in taiga-async-rabbitmq and taiga-events-rabbitmq
   RABBITMQ_USER: taiga
   RABBITMQ_PASS: taiga
-  
+
   # Telemetry settings
   ENABLE_TELEMETRY: "True"
-  
+
   # Enable OpenID to allow to register users if they do not exist. Set to false to disable all signups
   PUBLIC_REGISTER_ENABLED: "True"
 
@@ -93,7 +97,7 @@ services:
       - taiga
 
   taiga-back:
-    image: robrotheram/taiga-back-openid
+    image: bdware/taiga-back-openid
     environment: *default-back-environment
     volumes: *default-back-volumes
     networks:
@@ -126,7 +130,7 @@ services:
       - taiga
 
   taiga-front:
-    image: robrotheram/taiga-front-openid
+    image: bdware/taiga-front-openid
     environment:
       TAIGA_URL: "http://localhost:9000"
       TAIGA_WEBSOCKETS_URL: "ws://localhost:9000"
@@ -193,9 +197,11 @@ networks:
 ```
 
 ## Manual installation
+
 ### Taiga Backend
 
 Clone the repo and
+
 ```bash
 cd taiga-contrib-openid-auth/back
 workon taiga
@@ -225,16 +231,15 @@ Add the following values to `{path-to-taiga-frontend}/conf.json`:
 
 ```json
 {
-  "openidAuth" : "https://{url-to-keycloak}/auth/realms/{realm}/protocol/openid-connect/auth",
-  "openidName" : "{name-for-login-button}",
+  "openidAuth": "https://{url-to-keycloak}/auth/realms/{realm}/protocol/openid-connect/auth",
+  "openidName": "{name-for-login-button}",
   "openidClientId": "{client_id}",
-  "contribPlugins": [
-      "/plugins/openid-auth/openid-auth.json"
-  ]
+  "contribPlugins": ["/plugins/openid-auth/openid-auth.json"]
 }
 ```
 
 # Building
+
 The make file contains the basic blocks to locally build the UI and docker containers
 
 ```
@@ -242,9 +247,9 @@ make build
 ```
 
 # Contributions
-My thanks to all the people who have added to the plugin
-@cristianlazarop 
-@swedishborgie
-@baloo42 
-The whole taiga team who wrote the github plugin that this plugin is based off.
 
+My thanks to all the people who have added to the plugin
+@cristianlazarop
+@swedishborgie
+@baloo42
+The whole taiga team who wrote the github plugin that this plugin is based off.
