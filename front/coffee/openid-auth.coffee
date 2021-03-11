@@ -80,9 +80,9 @@ OpenIDLoginButtonDirective = ($window, $params, $location, $config, $events, $co
 
 
 		$el.on "click", ".button-auth", (event) ->
-			console.log(redirectURL());
-			redirectToUri = redirectURL();
-			url = "#{AUTH_URL}?redirect_uri=#{redirectToUri}&client_id=#{CLIENT_ID}&response_type=code"
+			console.log(redirectURL())
+			redirectToUri = redirectURL()
+			url = "#{AUTH_URL}?redirect_uri=#{redirectToUri}&client_id=#{CLIENT_ID}&response_type=code&state=#{getRandomString(8)}"
 			window.location.href = url
 
 		$scope.$on "$destroy", ->
@@ -93,6 +93,15 @@ OpenIDLoginButtonDirective = ($window, $params, $location, $config, $events, $co
 		restrict: "EA"
 		template: ""
 	}
+
+randomChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+getRandomString = (length) ->
+	result = ''
+	i = 0
+	while i < length
+		result += randomChars.charAt(Math.floor(Math.random() * randomChars.length))
+		i++
+	return result
 
 module = angular.module('taigaContrib.openidAuth', [])
 module.directive("tgOpenidLoginButton", ["$window", '$routeParams', "$tgLocation", "$tgConfig", "$tgEvents",
