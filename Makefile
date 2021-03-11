@@ -8,12 +8,12 @@ build: build-front build-back
 
 build-front:
 	cd front && npm install && npm run build
-	docker build docker/front -t bdware/taiga-front-openid:$(CIRCLE_BRANCH)
-	docker build docker/front -t bdware/taiga-front-openid:latest
+	docker build docker/front --no-cache -t bdware/taiga-front-openid:$(CIRCLE_BRANCH)
+	docker build docker/front --no-cache -t bdware/taiga-front-openid:latest
 
 build-back:
-	docker build docker/back -t bdware/taiga-back-openid:$(CIRCLE_BRANCH)
-	docker build docker/back -t bdware/taiga-back-openid:latest
+	docker build docker/back --no-cache -t bdware/taiga-back-openid:$(CIRCLE_BRANCH)
+	docker build docker/back --no-cache -t bdware/taiga-back-openid:latest
 	
 publish:
 	docker push bdware/taiga-back-openid:$(CIRCLE_BRANCH)
