@@ -26,11 +26,12 @@ Use the following environmental setting to configure the frontend conf.json and 
 
 ```
 ENABLE_OPENID: "True"
-OPENID_URL : "https://{url-to-keycloak}/auth/realms/{realm}/protocol/openid-connect/auth"
-OPENID_USER_URL : "https://{url-to-keycloak}/auth/realms/{realm}/protocol/openid-connect/userinfo"
-OPENID_TOKEN_URL : "https://{url-to-keycloak}/auth/realms/{realm}/protocol/openid-connect/token"
-OPENID_CLIENT_ID : "<CLient ID>"
-OPENID_CLIENT_SECRET : "<CLient SECRET>"
+OPENID_URL: "https://{url-to-keycloak}/auth/realms/{realm}/protocol/openid-connect/auth"
+OPENID_USER_URL: "https://{url-to-keycloak}/auth/realms/{realm}/protocol/openid-connect/userinfo"
+OPENID_TOKEN_URL: "https://{url-to-keycloak}/auth/realms/{realm}/protocol/openid-connect/token"
+OPENID_CLIENT_ID: "<CLient ID>"
+OPENID_CLIENT_SECRET: "<CLient SECRET>"
+OPENID_SCOPE: "String containing a space-separated list of scope values (as described in Section 3.3 of OAuth 2.0 [RFC6749]) to use when requesting access tokens (must include 'openid')"
 OPENID_NAME: "Name you want to give your openid provider e.g keycloak"
 ```
 
@@ -72,10 +73,10 @@ x-environment:
 
   #OpenID Settins
   ENABLE_OPENID: "True"
-  OPENID_USER_URL : "https://{url-to-keycloak}/auth/realms/{realm}/protocol/openid-connect/userinfo"
-  OPENID_TOKEN_URL : "https://{url-to-keycloak}/auth/realms/{realm}/protocol/openid-connect/token"
-  OPENID_CLIENT_ID : "<CLient ID>"
-  OPENID_CLIENT_SECRET : "<CLient SECRET>"
+  OPENID_USER_URL: "https://{url-to-keycloak}/auth/realms/{realm}/protocol/openid-connect/userinfo"
+  OPENID_TOKEN_URL: "https://{url-to-keycloak}/auth/realms/{realm}/protocol/openid-connect/token"
+  OPENID_CLIENT_ID: "<CLient ID>"
+  OPENID_CLIENT_SECRET: "<CLient SECRET>"
 
 x-volumes:
   &default-back-volumes
@@ -135,8 +136,9 @@ services:
       TAIGA_URL: "http://localhost:9000"
       TAIGA_WEBSOCKETS_URL: "ws://localhost:9000"
       ENABLE_OPENID: "true"
-      OPENID_URL : "https://{url-to-keycloak}/auth/realms/{realm}/protocol/openid-connect/auth"
-      OPENID_CLIENT_ID : "<ClientID>"
+      OPENID_URL: "https://{url-to-keycloak}/auth/realms/{realm}/protocol/openid-connect/auth"
+      OPENID_CLIENT_ID: "<ClientID>"
+      OPENID_SCOPE: "String containing a space-separated list of scope values (as described in Section 3.3 of OAuth 2.0 [RFC6749]) to use when requesting access tokens (must include 'openid')"
       OPENID_NAME: "Name you want to give your openid provider e.g keycloak"
     networks:
       - taiga
